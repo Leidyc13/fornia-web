@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fornia · El APPCC de tu obrador, sin papeles</title>
+<meta name="description" content="Fornia es el registro digital de APPCC para obradores, panaderías y pastelerías: temperaturas, limpieza, alérgenos, lotes y trazabilidad desde el móvil. Valencia.">
+<meta property="og:title" content="Fornia · El APPCC de tu obrador, sin papeles">
+<meta property="og:description" content="Temperaturas, limpieza, alérgenos, lotes y trazabilidad desde el móvil. Configurado por una técnica de calidad.">
+<meta property="og:image" content="https://fornia.es/img/fornia-redes-1200x630.png">
+<meta property="og:url" content="https://fornia.es/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta name="theme-color" content="#0b6b63">
+<link rel="icon" type="image/svg+xml" href="img/fornia-icono-app.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Outfit:wght@400;500;600;700&display=swap">
+<style>
+/* Fornia: verde horno + ámbar de brasa sobre blanco frío; titulares con la serif del logo */
+:root{
+  --bg:#ffffff; --bg-2:#f3f6f5; --ink:#1b2a29; --muted:#55686a; --line:#d9e3e1;
+  --teal:#0b6b63; --teal-deep:#08504a; --teal-soft:#dcefec; --amber:#e09a2b; --amber-soft:#fbefd9;
+  --f-display:"Young Serif",Georgia,"Times New Roman",serif;
+  --f-body:"Outfit","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,5.4vw,3.9rem)}
+h2{font-size:clamp(1.8rem,3.6vw,2.6rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+.eyebrow{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.lead{font-size:1.18rem;color:var(--muted);max-width:56ch}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--teal);transition:background .15s,color .15s}
+.btn.primary{background:var(--teal);color:#fff}
+.btn.primary:hover{background:var(--teal-deep);border-color:var(--teal-deep)}
+.btn.ghost{color:var(--teal);background:transparent}
+.btn.ghost:hover{background:var(--teal-soft)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+
+/* cabecera */
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.nav img{height:38px;width:auto}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-weight:500}
+.nav ul a{color:var(--ink);text-decoration:none}
+.nav ul a:hover{color:var(--teal)}
+.nav .btn{padding:9px 18px;font-size:.95rem}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* portada */
+.hero{padding-block:64px 72px;background:linear-gradient(180deg,var(--bg-2),var(--bg))}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero .lead{margin:20px 0 30px}
+.hero small{display:block;margin-top:16px;color:var(--muted);font-size:.92rem}
+.phone{justify-self:center;width:min(300px,78vw);border-radius:42px;padding:12px;background:var(--ink);box-shadow:0 30px 60px -30px rgba(11,107,99,.55)}
+.phone img{border-radius:32px;aspect-ratio:390/760;object-fit:cover;object-position:top;width:100%;height:auto}
+@media (max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.hero{padding-block:40px 56px}}
+
+section{padding-block:80px}
+.head{max-width:680px;margin-bottom:44px;display:flex;flex-direction:column;gap:14px}
+
+/* beneficios */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.trio article{padding:28px;border-radius:18px;background:var(--bg-2);display:flex;flex-direction:column;gap:10px}
+.trio .num{font-family:var(--f-display);font-size:2.4rem;color:var(--teal);line-height:1}
+.trio p{color:var(--muted)}
+@media (max-width:860px){.trio{grid-template-columns:minmax(0,1fr)}}
+
+/* cómo funciona */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:20px;border-top:3px solid var(--teal);display:flex;flex-direction:column;gap:8px}
+.steps li::before{content:"Paso " counter(s);font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.steps p{color:var(--muted)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* módulos */
+.mods{background:var(--bg-2)}
+.mods .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.modlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin-top:8px}
+.modlist div{display:flex;flex-direction:column;gap:2px}
+.modlist b{font-weight:600}
+.modlist span{color:var(--muted);font-size:.95rem}
+.mods .phone{width:min(280px,74vw)}
+@media (max-width:860px){.mods .wrap{grid-template-columns:minmax(0,1fr)}.modlist{grid-template-columns:minmax(0,1fr)}}
+
+/* sin gluten */
+.gf{background:var(--teal);color:#fff}
+.gf .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.gf .eyebrow{color:var(--amber)}
+.gf p{color:#d6ecea}
+.gf ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.gf li{padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.gf li b{display:block;color:#fff}
+@media (max-width:860px){.gf .wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* precios */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.plan{border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.plan.main{border:2px solid var(--teal);box-shadow:0 20px 40px -28px rgba(11,107,99,.6)}
+.plan .price{font-family:var(--f-display);font-size:2.3rem;line-height:1}
+.plan .price small{font-family:var(--f-body);font-size:.95rem;color:var(--muted)}
+.plan ul{margin:0;padding-left:20px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.tag{align-self:flex-start;background:var(--amber-soft);color:#8a5a00;font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:999px}
+.note{margin-top:22px;color:var(--muted);font-size:.95rem}
+.free{margin-top:28px;padding:20px 24px;border-radius:16px;background:var(--amber-soft);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+@media (max-width:900px){.plans{grid-template-columns:minmax(0,1fr)}}
+
+/* quién soy */
+.me .wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:start}
+.avatar{width:240px;height:240px;border-radius:50%;background:var(--teal-soft);display:grid;place-items:center;font-family:var(--f-display);font-size:4.6rem;color:var(--teal);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.me .bio{display:flex;flex-direction:column;gap:16px;max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.facts span{background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.92rem}
+@media (max-width:760px){.me .wrap{grid-template-columns:minmax(0,1fr)}.avatar{width:160px;height:160px;font-size:3rem}}
+
+/* preguntas */
+.faq{background:var(--bg-2)}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:600;font-size:1.08rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--teal);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);max-width:70ch}
+
+/* contacto */
+.contact{text-align:center}
+.contact .head{margin-inline:auto;align-items:center}
+.contact .actions{justify-content:center}
+.direct{margin-top:22px;color:var(--muted)}
+.direct b{color:var(--ink);user-select:all}
+
+
+.who{border-block:1px solid var(--line);background:var(--bg)}
+.who .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding-block:20px}
+.who p{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.who ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0;font-family:var(--f-display);font-size:1.15rem;color:var(--teal-deep)}
+.demo{background:var(--teal);color:#fff}
+.demo .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.demo .eyebrow{color:var(--amber)} .demo .lead,.demo p{color:#d6ecea}
+.demo ul{margin:18px 0 0;padding-left:20px;color:#d6ecea;display:flex;flex-direction:column;gap:6px}
+.demo form{background:#fff;color:var(--ink);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.demo label{display:flex;flex-direction:column;gap:5px;font-size:.9rem;font-weight:600;color:var(--muted)}
+.demo input,.demo select{font:inherit;font-size:1rem;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 13px;width:100%;min-width:0;background:#fff}
+.demo .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.demo button{border:0;cursor:pointer;font:inherit;justify-content:center}
+.demo small{color:var(--muted);font-size:.85rem}
+.demo .direct{color:#d6ecea;margin-top:22px} .demo .direct b{color:#fff;user-select:all}
+@media (max-width:860px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.demo .row2{grid-template-columns:minmax(0,1fr)}}
+footer{background:var(--ink);color:#b9c6c4;padding-block:36px;font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center}
+footer img{height:32px;width:auto}
+footer a{color:#e3ecea}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a href="#inicio" aria-label="Fornia, inicio"><img src="img/fornia-logo.svg" alt="Fornia" width="180" height="38"></a>
+  <nav aria-label="Principal"><ul><li><a href="#como-funciona">Cómo funciona</a></li><li><a href="#precios">Precios</a></li><li><a href="#quien-soy">Quién soy</a></li><li><a href="#demo">Contacto</a></li></ul></nav>
+  <a class="btn primary" href="#demo">Pide tu demo</a>
+</div></header>
+
+<main id="inicio">
+<div class="hero"><div class="wrap">
+  <div>
+    <p class="eyebrow">APPCC digital para obradores</p>
+    <h1>El APPCC de tu obrador, <em>sin papeles</em>.</h1>
+    <p class="lead">Tu equipo registra temperaturas, limpiezas, recepciones y lotes desde el móvil en segundos. Si algo falla, Fornia te avisa. Y ante una inspección o una alerta de un proveedor, lo tienes todo a un clic.</p>
+    <div class="actions"><a class="btn primary" href="#demo">Pide tu demo</a><a class="btn ghost" href="https://demo.fornia.es/" target="_blank" rel="noopener">Pruébala tú mismo</a></div>
+    <small>Te la enseño en tu obrador, sin compromiso. Sin instalar nada: funciona en cualquier móvil, tablet u ordenador.</small>
+  </div>
+  <div class="phone"><img src="img/app-hoy.webp" alt="Pantalla Hoy de Fornia con temperaturas, limpieza, caducidades e incidencias pendientes" width="390" height="760"></div>
+</div></div>
+
+<div class="who"><div class="wrap"><p>Pensado para</p><ul><li>Obradores</li><li>Panaderías</li><li>Pastelerías</li><li>Obradores sin gluten</li><li>Heladerías</li><li>Pequeña industria alimentaria</li></ul></div></div>
+
+<section aria-labelledby="t-beneficios"><div class="wrap">
+  <div class="head"><p class="eyebrow">Por qué Fornia</p><h2 id="t-beneficios">Menos tiempo con el papeleo, más tranquilidad con la inspección.</h2></div>
+  <div class="trio">
+    <article><span class="num">30 s</span><h3>Por registro</h3><p>Una temperatura, una limpieza o una recepción se apuntan en menos de 30 segundos, con la hora y las iniciales de quien lo hace.</p></article>
+    <article><span class="num">0</span><h3>Registros borrados</h3><p>Nada se puede borrar ni modificar. Si algo sale mal, Fornia pide la acción correctiva y abre una incidencia. Es lo que quiere ver un inspector.</p></article>
+    <article><span class="num">1 clic</span><h3>Para la trazabilidad</h3><p>De un lote de materia prima a los productos que lo llevan, y al revés. Si un proveedor avisa de un lote, sabes al momento qué retirar.</p></article>
+  </div>
+</div></section>
+
+<section id="como-funciona" aria-labelledby="t-como" style="padding-top:0"><div class="wrap">
+  <div class="head"><p class="eyebrow">Cómo funciona</p><h2 id="t-como">Te lo dejo funcionando en tu obrador.</h2><p class="lead">Fornia no es solo una app: te acompaña una técnica de calidad que la adapta a tu plan APPCC.</p></div>
+  <ol class="steps">
+    <li><h3>Visita</h3><p>Voy a tu obrador, revisamos cómo llevas hoy los registros y tu plan APPCC.</p></li>
+    <li><h3>Configuración</h3><p>Dejo dadas de alta tus cámaras con sus rangos, tus tareas de limpieza y a tu equipo.</p></li>
+    <li><h3>Día a día</h3><p>Tu equipo registra desde el móvil. La pantalla Hoy dice qué falta y qué necesita atención.</p></li>
+    <li><h3>Inspección</h3><p>Sacas los registros de cualquier fecha en segundos, listos para el inspector o para Excel.</p></li>
+  </ol>
+</div></section>
+
+<section class="mods" aria-labelledby="t-mods"><div class="wrap">
+  <div>
+    <div class="head" style="margin-bottom:24px"><p class="eyebrow">Todo en un sitio</p><h2 id="t-mods">Los registros de tu APPCC, en una sola app.</h2></div>
+    <div class="modlist">
+      <div><b>Temperaturas</b><span>Cámaras, congeladores y vitrinas, con alerta fuera de rango.</span></div>
+      <div><b>Limpieza</b><span>Tareas diarias y semanales, marcadas con un toque.</span></div>
+      <div><b>Recepción</b><span>Proveedor, lote, caducidad, temperatura y los 14 alérgenos.</span></div>
+      <div><b>Producción</b><span>Lotes que heredan los alérgenos de sus ingredientes.</span></div>
+      <div><b>Trazabilidad</b><span>Hacia atrás y hacia delante, en un clic.</span></div>
+      <div><b>Incidencias</b><span>Acciones correctivas con quién y cuándo se cerraron.</span></div>
+      <div><b>Informes</b><span>Cualquier registro por fechas, para Excel o la inspección.</span></div>
+      <div><b>Equipo</b><span>Cada persona con su cuenta. Altas con un código.</span></div>
+    </div>
+  </div>
+  <div class="phone"><img src="img/app-trazabilidad.webp" alt="Pantalla de trazabilidad de Fornia mostrando en qué lotes se usó un ingrediente" width="390" height="760" loading="lazy"></div>
+</div></section>
+
+<section class="gf" aria-labelledby="t-gf"><div class="wrap">
+  <div style="display:flex;flex-direction:column;gap:16px"><p class="eyebrow">Pensado para obradores sin gluten</p><h2 id="t-gf">Donde un error con el gluten no tiene vuelta atrás.</h2><p>Si tu obrador es sin gluten, Fornia vigila por ti en cada paso.</p></div>
+  <ul>
+    <li><b>En la recepción</b>Avisa si entra una materia prima con gluten, para rechazarla antes de que pase la puerta.</li>
+    <li><b>En la producción</b>Si un lote lleva un ingrediente con gluten, te dice que no puede etiquetarse como sin gluten.</li>
+    <li><b>En la etiqueta</b>Te dice qué alérgenos declarar en cada lote, según el Reglamento UE 1169/2011.</li>
+  </ul>
+</div></section>
+
+<section id="precios" aria-labelledby="t-precios"><div class="wrap">
+  <div class="head"><p class="eyebrow">Precios</p><h2 id="t-precios">Claros, sin permanencia.</h2></div>
+  <div class="plans">
+    <article class="plan"><h3>Puesta en marcha</h3><p class="price">desde 150 € <small>pago único</small></p><ul><li>Visita a tu obrador</li><li>Revisión de tu plan APPCC</li><li>Configuración de equipos, tareas y equipo de trabajo</li><li>Formación para tu equipo</li></ul></article>
+    <article class="plan main"><span class="tag">Lo esencial</span><h3>Fornia</h3><p class="price">desde 29 € <small>al mes por local</small></p><ul><li>Todos los registros y la trazabilidad</li><li>Usuarios ilimitados para tu equipo</li><li>Copias de seguridad y actualizaciones</li><li>Soporte por teléfono y email</li></ul></article>
+    <article class="plan"><h3>Revisión de calidad</h3><p class="price">desde 40 € <small>al mes, opcional</small></p><ul><li>Reviso tus registros cada mes</li><li>Te aviso de fallos antes que el inspector</li><li>Te ayudo a preparar inspecciones y auditorías</li></ul></article>
+  </div>
+  <div class="free"><p><b>Pruébalo antes de decidir:</b> la demo es gratis y sin registro, y el primer mes de cuota también es gratis.</p><a class="btn primary" href="https://demo.fornia.es/" target="_blank" rel="noopener">Pruébala tú mismo</a></div>
+  <p class="note">Precios sin IVA. Descuento para varios locales. Puedes darte de baja cuando quieras y te entrego todos tus registros.</p>
+</div></section>
+
+<section id="quien-soy" class="me" aria-labelledby="t-yo" style="padding-top:0"><div class="wrap">
+  <div class="avatar" aria-hidden="true">LC</div>
+  <div class="bio">
+    <p class="eyebrow">Quién está detrás</p>
+    <h2 id="t-yo">Soy Leidy Cabeza, y conozco el APPCC desde dentro.</h2>
+    <p>Soy ingeniera química y técnica de calidad. He trabajado más de tres años en control de calidad en planta, gestionando no conformidades y trazabilidad, y conseguí reducir las mermas un 15 %.</p>
+    <p>También soy la fundadora de <b>Wild Gluten Free</b>, una marca de alimentación sin gluten. Sé lo que es elaborar con alérgenos, cuidar cada lote y preparar una inspección. Por eso creé Fornia: la herramienta que me habría gustado tener.</p>
+    <p>Además desarrollo software desde 2022, así que Fornia está hecha y mantenida por la misma persona que te la configura. Estoy en Valencia y voy en persona a tu obrador.</p>
+    <div class="facts"><span>Ingeniera química</span><span>Técnica de calidad · ISO 9001</span><span>Fundadora de Wild Gluten Free</span><span>Valencia</span></div>
+  </div>
+</div></section>
+
+<section class="faq" aria-labelledby="t-faq"><div class="wrap" style="max-width:860px">
+  <div class="head"><p class="eyebrow">Preguntas frecuentes</p><h2 id="t-faq">Lo que suelen preguntarme.</h2></div>
+  <details><summary>¿Mis empleados sabrán usarlo?</summary><p>Si usan WhatsApp, pueden usar Fornia: son botones grandes y pocos datos. El día de la puesta en marcha les doy una formación de 15 minutos.</p></details>
+  <details><summary>¿Es válido ante una inspección de Sanidad?</summary><p>La normativa pide que los registros existan, estén al día y sean fiables, no que estén en papel. Fornia guarda quién, cuándo y qué se hizo, no permite borrar registros y te los da por fechas cuando te los pidan.</p></details>
+  <details><summary>¿Dónde están mis datos?</summary><p>En servidores en la Unión Europea. Cada obrador solo ve sus propios datos, con usuario y contraseña para cada persona.</p></details>
+  <details><summary>¿Necesito instalar algo?</summary><p>No. Fornia funciona en el navegador del móvil, la tablet o el ordenador. Puedes añadirla a la pantalla de inicio para abrirla como una app. Necesita conexión a internet; vale la del móvil.</p></details>
+  <details><summary>¿Y si me equivoco al apuntar algo?</summary><p>No se borra: se añade el registro correcto o una incidencia que explica el error. Es justo lo que da confianza a un inspector.</p></details>
+  <details><summary>¿Qué pasa si quiero dejarlo?</summary><p>Me avisas con 15 días y te entrego todos tus registros en Excel. No hay permanencia.</p></details>
+</div></section>
+
+<section id="demo" class="demo" aria-labelledby="t-demo"><div class="wrap">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <p class="eyebrow">Pide tu demo</p>
+    <h2 id="t-demo">Te enseño Fornia en tu obrador.</h2>
+    <p class="lead">Déjame tus datos y te escribo para quedar el día que mejor te venga. La visita dura unos 20 minutos y es sin compromiso.</p>
+    <ul><li>Vemos cómo llevas hoy tus registros.</li><li>Te enseño Fornia con datos de ejemplo.</li><li>Te digo qué necesitarías y cuánto costaría.</li></ul>
+    <p class="direct">¿Prefieres llamar? <b>+34 670 06 29 98</b> · <b>hola@fornia.es</b></p>
+  </div>
+  <form id="fDemo" novalidate>
+    <div class="row2"><label for="dN">Tu nombre<input id="dN" name="nombre" autocomplete="name" required></label><label for="dO">Obrador o negocio<input id="dO" name="obrador" autocomplete="organization" required></label></div>
+    <div class="row2"><label for="dT">Teléfono<input id="dT" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required></label><label for="dL">Localidad<input id="dL" name="localidad" autocomplete="address-level2" placeholder="p. ej. Valencia"></label></div>
+    <label for="dK">¿Cómo llevas hoy los registros?<select id="dK" name="registros"><option>En papel</option><option>En Excel</option><option>Con otra app</option><option>No los llevo al día</option></select></label>
+    <button class="btn primary" type="submit">Pide tu demo por WhatsApp</button>
+    <a class="btn ghost" id="dMail" href="mailto:hola@fornia.es?subject=Demo%20de%20Fornia" style="justify-content:center">O pídela por email</a>
+    <small id="dMsg" role="status">Se abrirá WhatsApp con tu mensaje ya escrito; solo tienes que enviarlo.</small>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <img src="img/fornia-logo-blanco.svg" alt="Fornia" width="150" height="32">
+  <p>© 2026 Fornia · Valencia · <a href="aviso-legal.html">Aviso legal y privacidad</a></p>
+  <p><a href="https://app.fornia.es/">Acceso clientes</a></p>
+</div></footer>
+
+<script>
+(function(){
+  var f=document.getElementById('fDemo');if(!f)return;
+  function msg(){return 'Hola Leidy, quiero una demo de Fornia.\nNombre: '+f.nombre.value.trim()+'\nObrador: '+f.obrador.value.trim()+'\nTeléfono: '+f.telefono.value.trim()+(f.localidad.value.trim()?'\nLocalidad: '+f.localidad.value.trim():'')+'\nRegistros hoy: '+f.registros.value}
+  f.addEventListener('input',function(){document.getElementById('dMail').href='mailto:hola@fornia.es?subject='+encodeURIComponent('Demo de Fornia')+'&body='+encodeURIComponent(msg())});
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var miss=['nombre','obrador','telefono'].filter(function(k){return !f[k].value.trim()});
+    var out=document.getElementById('dMsg');
+    if(miss.length){out.textContent='Falta: '+miss.map(function(k){return {nombre:'tu nombre',obrador:'el nombre del obrador',telefono:'tu teléfono'}[k]}).join(', ')+'.';f[miss[0]].focus();return}
+    window.open('https://wa.me/34670062998?text='+encodeURIComponent(msg()),'_blank','noopener');
+    out.textContent='¡Gracias! Si WhatsApp no se ha abierto, llámame o escríbeme al teléfono de la izquierda.';
+  });
+})();
+</script>
+</body>
+</html>
